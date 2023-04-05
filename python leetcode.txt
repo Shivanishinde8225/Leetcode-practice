@@ -1,0 +1,11 @@
+class Solution:
+    def mergeArrays(self, nums1: List[List[int]], nums2: List[List[int]]) -> List[List[int]]:
+        dic = collections.defaultdict(int)
+        res = []
+        for id1, val1 in nums1:
+            dic[id1] += val1
+        for id2, val2 in nums2:
+            dic[id2] += val2
+        for k in sorted(dic.keys()):
+            res.append([k, dic[k]])
+        return res

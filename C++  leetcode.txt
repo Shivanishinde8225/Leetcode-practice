@@ -1,0 +1,182 @@
+class Solution {
+public:
+    vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
+        vector<vector<int>>res;
+        // vector<int>v;
+        // int i = 0, j = 0;
+        // while(i < nums1.size() && j < nums2.size()){
+        //     if(nums1[i][0] < nums2[j][0]){
+        //         res.push_back(nums1[i]);
+        //         i++;
+        //     }
+        //     else if(nums1[i][0] > nums2[j][0]){
+        //         res.push_back(nums2[j]);
+        //         j++;
+        //     }
+        //     else{                
+        //         v.push_back(nums1[i][0]);
+        //         v.push_back(nums1[i][1] + nums2[j][1]);
+        //         res.push_back(v);
+        //         v.clear();
+        //         i++;
+        //         j++;              
+        //     }
+        // }
+        // if(i < nums1.size() ){
+        //     while(i < nums1.size()){
+        //         res.push_back(nums1[i]);
+        //         i++;
+        //     }
+            
+        // }
+        // if( j < nums2.size()){
+        //     while(j < nums2.size()){
+        //         res.push_back(nums2[j]);
+        //         j++;
+        //     }
+            
+        // }
+
+        map<int,int >mp;
+        for(auto i : nums1){
+            mp[i[0]] += i[1];
+        }
+        for(auto i : nums2){
+            mp[i[0]] += i[1];
+        }
+        for(auto i : mp){
+            res.push_back({i.first,i.second});
+        }
+
+        return res;
+    }
+};
+
+*******************2571. Minimum Operations to Reduce an Integer to 0(DP)
+
+class Solution {
+public:
+    int minOperations(int n) {
+        if(n == pow(2, (int)log2(n))){
+            return 1;
+        }
+        
+        int low  = pow(2, (int)log2(n));
+        int high = pow(2, (int)log2(n)+1);
+        
+        int d1 = n - low;
+        int d2 = high - n;
+    
+        return 1 + (min(minOperations(d1) , minOperations(d2))) ;  
+    }
+};
+
+********************20. Valid Parentheses(stack)
+class Solution {
+public:
+    bool isValid(string s) {
+       unordered_map<char, char>mp = {{')','('}, {']','['} , { '}','{'}};
+       stack<char>st;
+        for(auto i : s){
+            if(i == '[' || i == '{' || i == '('){
+                st.push(i);
+            }
+            else if ( st.size() ==0 || st.top() != mp[i]) return false;
+            else st.pop();
+        }
+        return st.empty();
+    }
+};
+
+**********************509. Fibonacci Number(DP)
+class Solution {
+public:
+    int fib(int N) {
+    //  recursion   
+	// if (N <= 1)
+	// 	return N;
+	// return fib(N - 1) + fib(N - 2); 
+
+
+    // DP with recursion  
+    // vector<int>dp(N+1, -1);
+    // if (N <= 1) return N;
+    // if (dp[N] != -1) return dp[N];
+
+    // return dp[N] = fib(N-1) + fib(N-2);
+
+    // DP with tabulation
+    // vector<int>dp(N+1);
+    // dp[0] = 0,dp[1] = 1;
+    // for(int i = 2; i <= N; i++ ){
+    //     dp[i] = dp[i-1] + dp[i-2];
+    // }
+    // return dp[N];
+
+    // optimization DP with tabulation
+    int prev2 = 0,prev = 1,curr;
+    for(int i = 2; i <= N; i++ ){
+        curr = prev2 + prev;
+        prev2 = prev;
+        prev = curr;
+    }
+    return curr;
+    }
+};
+
+**********************338. Counting Bits(DP)
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int>v;
+        for(int i = 0; i <= n; i++){
+            int sum = 0;
+            int num = i;
+            while(num != 0){
+                sum += num%2;
+                num = num/2;
+            }
+            v.push_back(sum);
+        }
+        return v;
+    }
+};
+
+
+********************70. Climbing Stairs
+class Solution {
+public:
+    int stairscount(int n){
+        int res = 0;
+        if(n == 0) return 1;
+        if(n == 1) return 1;
+        if(n == 2) return 2;
+        int left = 1;
+        int right = 2;
+        for(int i = 2;i < n; i++){
+            res = left + right;
+            left = right;
+            right = res;
+        }
+        return res;
+    }
+
+
+
+    // int helper(int n){
+    //     int left,right;
+    //     if(n == 0) return 1;
+    //     if(n == 1) return 1;
+    //     if(n == 2) return 2;
+    //     left  = helper(n -1);
+    //     right = helper(n -2);
+    //     return left + right;
+    }
+    int climbStairs(int n) {
+        // return helper(n);
+
+
+        int res = stairscount(n);
+        return res;
+    }
+};
