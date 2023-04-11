@@ -1,0 +1,58 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+    //     unordered_map<int, int> hash;
+	// vector<int> result;
+	// for (int i = 0; i < nums.size(); i++) {
+	// 	int numberToFind = target - nums[i];
+
+    //         //if numberToFind is found in map, return them
+	// 	if (hash.find(numberToFind) != hash.end()) {
+    //                 //+1 because indices are NOT zero based
+	// 		result.push_back(hash[numberToFind]);
+	// 		result.push_back(i);			
+	// 		return result;
+	// 	}
+
+    //         //number was not found. Put it in the map.
+	// 	hash[nums[i]] = i;
+	// }
+	// return result;
+
+// optimal
+    map<int,int>mp;
+    for(int i = 0;i < nums.size(); i++){
+        int numberToFind = target-nums[i];
+        if(mp.find(numberToFind) != mp.end()){
+            return { mp[numberToFind], i};
+        }
+        mp[nums[i]] = i;
+    } 
+    return {-1,-1} ;  
+    }
+
+
+
+        //brute force 
+    //   vector<int>v;
+    //   int j=0;
+    //   for(int i=1;i<nums.size();i++){
+    //       for(int j=1;j<nums.size();j){
+    //             if(nums[i]+nums[j]==target){
+    //                 v.push_back(i);
+    //                 v.push_back(j);
+    //                 return v;
+    //             }
+    //             else if(i<nums.size()){
+    //                 if(i==nums.size()-1){
+    //                     i=1;
+    //                 }               
+    //             }
+    //             else{                  
+    //                 j++;
+    //             }
+    //         }
+    //     }
+    //     return v;
+    // }  
+};
