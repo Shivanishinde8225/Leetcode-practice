@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        // if(nums.size()==1){return nums[0];}
+        // sort(nums.begin(),nums.end());
+        // int count=0,maxcount=nums.size()/2,pos=nums[0];
+        // for(int i=0;i<nums.size();i++){
+        //     if(pos==nums[i]){
+        //         count++;
+        //         if(count>maxcount){return pos;}
+        //     }
+        //     else{
+        //         pos=nums[i+1];
+        //         count=1;
+        //     }
+        // }
+        // return -1;
+
+// better
+    //     int n = nums.size();
+    //     map<int,int>mp;
+    //     for(int i = 0; i < n ; i++){
+    //         mp[nums[i]]++;
+    //     }
+    //     for(auto it : mp){
+    //         if(it.second > (n/2)) return it.first;
+    //     }
+    //     return -1;
+    
+// optimal (Moore's voting algo)
+    int n = nums.size();
+    int cnt = 0,ele ;
+    for(int i= 0; i < n; i++){
+        if(cnt == 0){
+            cnt++;
+            ele = nums[i];
+        }
+        else if(nums[i] == ele) cnt++;
+        else cnt--;
+    }
+    cnt = 0;
+    for(int i = 0; i < n; i++){
+        if(nums[i] == ele) cnt++;
+    }
+    if(cnt > (n/2)) return ele;
+    return -1;
+    } 
+};

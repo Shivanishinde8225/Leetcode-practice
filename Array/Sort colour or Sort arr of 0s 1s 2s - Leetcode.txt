@@ -1,0 +1,46 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        // int min;
+        // for(int i=0;i<nums.size();i++){
+        //    min=nums[i];
+        //    for(int j=i+1;j<nums.size();j++){
+        //        if(min<nums[j]){
+        //            min=nums[j];
+        //        }
+        //    }
+        //    swap(nums[i],nums[min]);
+        // }
+
+        // brute force (merge sort)
+
+        // better
+        // int n = nums.size();
+        // int cnt = 0,cnt1 = 0,cnt2 = 0;
+        // for(int i = 0; i < n; i++){
+        //     if(nums[i] == 0) cnt++;
+        //     else if(nums[i] == 1) cnt1++;
+        //     else cnt2++;
+        // }
+        // for(int i = 0; i < cnt; i++) nums[i] = 0;
+        // for(int i = cnt; i < cnt1 + cnt; i++) nums[i] = 1;
+        // for(int i = cnt1 + cnt; i < n; i++) nums[i] = 2;
+
+// optimal(Dutch National flag algo)
+        int low = 0,mid = 0,high = nums.size()-1;
+        while(mid <= high){
+            if(nums[mid] == 0){
+                swap(nums[low],nums[mid]);
+                low++;
+                mid++;
+            }
+            else if(nums[mid] == 1) mid++;
+            else {
+                swap(nums[high],nums[mid]);
+                high--;
+            }
+        }
+
+
+    }
+};
