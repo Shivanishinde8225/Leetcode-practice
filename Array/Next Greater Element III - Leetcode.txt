@@ -1,0 +1,87 @@
+//leetcode
+
+class Solution {
+public:
+    int nextGreaterElement(int n) {
+    vector<int>v;
+    int num = n,rem = 0;
+   
+    while(num > 0)
+    {   rem = num%10;
+        num/=10;
+        v.push_back(rem);
+    } 
+  
+    reverse(v.begin(),v.end());
+    int m = v.size();
+    int i = m-1;
+    while(i>=1 && v[i-1]>=v[i] ){
+        i--;
+    }
+    if(i == 0) return -1;
+
+   
+    int index= 0;
+    for(int j=i-1;j<m;j++){
+        if(v[j]>v[i-1] ){
+            index=j;
+        }
+    }  
+
+    swap(v[i-1],v[index]);
+    sort(v.begin()+i,v.end());
+
+    long long ans = 0;
+    for(int i = 0; i < m; i++){
+        ans = (ans*10) + v[i];
+    }
+   
+    if(ans>INT_MAX)
+        return -1;
+  
+    return ans;
+    
+    }
+};
+
+
+
+// codestudio
+
+
+#include <bits/stdc++.h> 
+long long int bobsHomework(int n)
+{
+    // Write your code here.
+    vector<int>v;
+    int num = n;
+    while(num > 0){
+        v.push_back(num%10);
+        num = num/10;
+    }
+
+    reverse(v.begin(),v.end());
+    int m = v.size();
+    int i = m-1;
+    while(i >= 1 && v[i-1] >= v[i]){
+        i--;
+    }
+    if(i == 0) return -1;
+
+    int index= 0;
+    for(int j = i-1;j < m; j++){
+        if(v[j] > v[i-1]){
+            index = j;
+        }
+    }
+    swap(v[i-1],v[index]);
+    sort(v.begin()+i,v.end());
+
+    long long ans = 0;
+    for(int i = 0; i < m; i++){
+        ans = (ans*10) + v[i];
+    }
+
+    return ans;
+    
+}
