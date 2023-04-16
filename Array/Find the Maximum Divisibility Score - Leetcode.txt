@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxDivScore(vector<int>& nums, vector<int>& divisors) {
+        
+        sort(divisors.begin(),divisors.end());
+        
+        int maxi = -1,val = divisors[0];
+        for(auto x : divisors){
+            int cnt = 0;           
+            for(auto it : nums){
+                if(it % x == 0) cnt++;
+            }           
+            if(cnt > maxi){
+                maxi = cnt;
+                val = x;
+            }
+        }        
+        return val;
+    }
+};

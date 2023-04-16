@@ -1,0 +1,55 @@
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+
+        // optimal 
+        vector<int>v;
+        int n = mat.size() , m = mat[0].size();
+        int cnt,ind = -1,one_cnt = -1;
+
+        for(int i = 0; i < n; i++){
+            cnt = 0;
+            for(int j = 0;j < m; j++){
+                if(mat[i][j] == 1){
+                    cnt++;
+                }
+            }
+            if(cnt > one_cnt){
+                ind = i;
+                one_cnt = cnt; 
+            }
+        }
+       
+        v.push_back(ind);
+        v.push_back(one_cnt);
+        return v;
+    
+        // brute force
+
+        // map<int ,int>mp;
+        // int n = mat.size() , m = mat[0].size(), cnt;
+        
+        // for(int i = 0; i < n; i++){
+        //     cnt = 0;
+        //     for(int j = 0;j < m; j++){
+        //         if(mat[i][j] == 1){
+        //             cnt++;
+        //         }
+        //     }
+        //     mp[i] = cnt;
+        // }
+        
+        // int maxi = 0;
+        // int ind = 0,one_cnt = mp[0];
+        // for(auto it : mp){
+          
+        //     if(it.second > maxi){
+        //         maxi = it.second;
+        //         ind = it.first;
+        //         one_cnt = it.second; 
+        //     }
+        // }
+        // return {ind,one_cnt};
+    }
+    
+};
