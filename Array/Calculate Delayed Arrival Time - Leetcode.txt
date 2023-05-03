@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int findDelayedArrivalTime(int arrivalTime, int delayedTime) {
+
+        // brute force
+        // int res = arrivalTime + delayedTime;
+        // if(res == 24) return 0;
+        // if(res > 24) {
+        //     res = res % 24;
+        // }
+        // return res;
+
+        // optimal 
+        int res = arrivalTime + delayedTime;
+        if(res >= 24) return res-24;
+
+        return res;
+    }
+};
